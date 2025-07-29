@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: gcp_qut_traps_data
+    database: qut-data-analytics-capstone # or your database name
+    schema: capstone_analytics # or your schema name
+    tables:
+      - name: raw_traps
+        description: "Traps data loaded from external TSV files in GCS."
+        external:
+          location: "gs://qut-capstone-data/raw/goodnature_trap_data.csv"
+          file_format: "CSV"          
+          options:
+              format: csv
+              skip_leading_rows: 1
+        columns:
+          - name: id
+            data_type: integer
+            description: Unique identifier of the trap data
+            tests:
+              - unique
+              - not_null
+          - name: when
+            quote: true
+            data_type: string
+            description: Timestamp when the data was received
+          - name: activityType
+            data_type: string
+            description: Type of trap activity
+          - name: strikeTime
+            data_type: string
+            description: The timestamp when the activity occurred
+          - name: batchId
+            data_type: integer
+            description: The id of the batch of the trap
+          - name: createdBy
+            data_type: integer
+            description: The id of the user
+          - name: trapId
+            data_type: integer
+            description: The id of the trap
+          - name: groupId
+            data_type: integer
+            description: The group id of the trap
+          - name: organisationId
+            data_type: integer
+            description: The organisation id
+          - name: killType
+            data_type: string
+            description: The time of kill
+          - name: latitude
+            data_type: decimal
+            description: The latitude where the trap was set
+          - name: longitude
+            data_type: decimal
+            description: The longitude where the trap was set
+          - name: temperature
+            data_type: decimal
+            description: The temperate of the location where the trap was set
+          - name: batteryLevel
+            data_type: integer
+            description: The level of the battery
+          - name: hasImage
+            data_type: boolean
+            description: If there is an image
+          - name: trapInstalledAt
+            data_type: string
+            description: The timestamp of when the trap was installed

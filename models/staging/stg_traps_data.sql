@@ -5,7 +5,7 @@ WITH traps AS (
 )
 SELECT
     id,
-    'when' AS uploaded_at,
+    `when` AS uploaded_at,
     activityType AS activity_type,
     strikeTime AS strike_at,
     batchId AS batch_id,

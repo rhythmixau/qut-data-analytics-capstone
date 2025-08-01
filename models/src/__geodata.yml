@@ -1,0 +1,141 @@
+version: 2
+
+sources:
+  - name: uploaded_geo_data
+    database: qut-data-analytics-capstone # or your database name
+    schema: capstone_analytics # or your schema name
+    tables:
+      - name: nz_suburbs_localities
+        description: "New Zealand Suburbs and Localities Geodata"
+        columns:
+          - name: WKT
+          - name: id
+          - name: parent_id 
+          - name: name
+          - name: type 
+          - name: start_date 
+          - name: name_ascii
+      - name: raw_addresses
+        description: "All addresses in New Zealand"
+        external:
+          location: "gs://qut-capstone-data/raw/nz-addresses.csv"
+          file_format: "CSV"          
+          options:
+              format: csv
+              skip_leading_rows: 1
+        columns:
+          - name: WKT
+            data_type: string
+          - name: address_id
+            data_type: integer
+          - name: source_dataset
+            data_type: string
+          - name: change_id
+            data_type: integer
+          - name: full_address_number
+            data_type: string
+          - name: full_road_name
+            data_type: string
+          - name: full_address
+            data_type: string
+          - name: territorial_authority
+            data_type: string
+          - name: unit_type
+            data_type: string
+          - name: unit_value
+            data_type: string
+          - name: level_type
+            data_type: string
+          - name: level_value
+            data_type: string
+          - name: address_number_prefix
+            data_type: string
+          - name: address_number
+            data_type: string
+          - name: address_number_suffix
+            data_type: string
+          - name: address_number_high
+            data_type: string
+          - name: road_name_prefix
+            data_type: string
+          - name: road_name
+            data_type: string
+          - name: road_type_name
+            data_type: string
+          - name: road_suffix
+            data_type: string
+          - name: water_name
+            data_type: string
+          - name: water_body_name
+            data_type: string
+          - name: suburb_locality
+            data_type: string
+          - name: town_city
+            data_type: string
+          - name: address_class
+            data_type: string
+          - name: address_lifecycle
+            data_type: string
+          - name: gd2000_xcoord
+            data_type: float64
+          - name: gd2000_ycoord
+            data_type: float64
+          - name: road_name_ascii
+            data_type: string
+          - name: water_name_ascii
+            data_type: string
+          - name: water_body_name_ascii
+            data_type: string
+          - name: suburb_locality_ascii
+            data_type: string
+          - name: town_city_ascii
+            data_type: string
+          - name: full_road_name_ascii
+            data_type: string
+          - name: full_address_ascii
+            data_type: string
+          - name: shape_X
+            data_type: float64
+          - name: shape_Y
+            data_type: float64
+      - name: raw_au_suburbs
+        description: "Australian suburbs data"
+        external:
+          location: "gs://qut-capstone-data/raw/australian_suburbs.csv"
+          file_format: "CSV"          
+          options:
+              format: csv
+              skip_leading_rows: 1
+        columns:
+          - name: ssc_code
+            data_type: integer
+          - name: suburb
+            data_type: string
+          - name: urban_area
+            data_type: string
+          - name: postcode
+            data_type: string
+          - name: state
+            data_type: string
+          - name: state_name
+            data_type: string
+          - name: type
+            data_type: string
+          - name: local_goverment_area
+            data_type: string
+          - name: statistic_area
+            data_type: string
+          - name: elevation
+            data_type: integer
+          - name: population
+            data_type: integer
+          - name: median_income
+            data_type: integer
+          - name: sqkm
+            data_type: float64
+          - name: lat
+            data_type: float64
+          - name: lng
+            data_type: float64
+          - name: timezone
+            data_type: string

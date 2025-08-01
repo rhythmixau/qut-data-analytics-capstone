@@ -37,6 +37,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   capstone_analytics:
+    +language: python
+    # Change the machine types to smaller ones
+    +dataproc_master_machine_type: "n1-standard-2"
+    +dataproc_worker_machine_type: "n1-standard-2"
+    +dataproc_num_workers: 2 # Keep the number of workers
     +materialized: table
     # Applies to all files under models/example/
     # mart:

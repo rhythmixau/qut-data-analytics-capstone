@@ -27,6 +27,9 @@ sources:
           - name: activityType
             data_type: string
             description: Type of trap activity
+            tests:
+              - accepted_values: 
+                  values: ['LURE_LOW', 'NO_CO2_LEFT', 'CO2_LOW', 'SYNCED', 'STRIKE', 'UNCOLLECTED_DATA', 'CO2_REPLACED', 'LURE_REPLACED', 'TEST_STRIKE']
           - name: strikeTime
             data_type: string
             description: The timestamp when the activity occurred

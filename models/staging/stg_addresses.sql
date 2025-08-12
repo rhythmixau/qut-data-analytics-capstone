@@ -1,7 +1,7 @@
 WITH addresses AS (
     SELECT 
         *
-    FROM {{ source("uploaded_geo_data", 'raw_addresses') }}
+    FROM {{ source("uploaded_geo_data", 'raw_nz_addresses') }}
 )
 SELECT 
     WKT,

@@ -2,17 +2,11 @@ version: 2
 
 sources:
   - name: gcp_qut_traps_data
-    database: qut-data-analytics-capstone # or your database name
-    schema: capstone_analytics # or your schema name
+    database: qut_capstone_db # or your database name
+    schema: qut_capstone_schema # or your schema name
     tables:
-      - name: raw_traps
+      - name: raw_trap_data
         description: "Traps data loaded from external TSV files in GCS."
-        external:
-          location: "gs://qut-capstone-data/raw/goodnature_trap_data.csv"
-          file_format: "CSV"          
-          options:
-              format: csv
-              skip_leading_rows: 1
         columns:
           - name: id
             data_type: integer

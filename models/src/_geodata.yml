@@ -2,27 +2,11 @@ version: 2
 
 sources:
   - name: uploaded_geo_data
-    database: qut-data-analytics-capstone # or your database name
-    schema: capstone_analytics # or your schema name
+    database: qut_capstone_db # or your database name
+    schema: qut_capstone_schema # or your schema name
     tables:
-      - name: nz_suburbs_localities
-        description: "New Zealand Suburbs and Localities Geodata"
-        columns:
-          - name: WKT
-          - name: id
-          - name: parent_id 
-          - name: name
-          - name: type 
-          - name: start_date 
-          - name: name_ascii
-      - name: raw_addresses
+      - name: raw_nz_addresses
         description: "All addresses in New Zealand"
-        external:
-          location: "gs://qut-capstone-data/raw/nz-addresses.csv"
-          file_format: "CSV"          
-          options:
-              format: csv
-              skip_leading_rows: 1
         columns:
           - name: WKT
             data_type: string
@@ -100,12 +84,6 @@ sources:
             data_type: float64
       - name: raw_au_suburbs
         description: "Australian suburbs data"
-        external:
-          location: "gs://qut-capstone-data/raw/australian_suburbs.csv"
-          file_format: "CSV"          
-          options:
-              format: csv
-              skip_leading_rows: 1
         columns:
           - name: ssc_code
             data_type: integer

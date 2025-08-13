@@ -3,7 +3,7 @@ WITH locations AS (
         location_id,
         latitude, 
         longitude
-    FROM {{ ref("stg_locations") }}
+    FROM {{ ref("int_trap_locations") }}
 ), addresses AS (
     SELECT 
         address_id, 
@@ -16,7 +16,7 @@ WITH locations AS (
         water_body_name,
         longitude,
         latitude
-    FROM {{ ref("stg_addresses") }}
+    FROM {{ ref("stg_nz_addresses") }}
 )
 SELECT
     loc.location_id,

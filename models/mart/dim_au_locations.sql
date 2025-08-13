@@ -3,7 +3,7 @@ WITH aus_suburbs AS (
         l.location_id,
         l.latitude,
         l.longitude 
-    FROM {{ ref("stg_locations") }} l
+    FROM {{ ref("int_trap_locations") }} l
     LEFT JOIN {{ ref("dim_nz_locations") }} d ON l.location_id = d.location_id
     WHERE d.location_id IS NULL
 ),

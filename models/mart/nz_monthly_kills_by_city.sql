@@ -1,9 +1,14 @@
+{{
+    config(materialized='view')
+}}
+
 WITH kills AS (
     SELECT 
         TO_CHAR(STRIKED_DATE::DATE, 'YYYY-MM') AS MONTH_YEAR,
         TOWN_CITY,
         TERRITORIAL_AUTHORITY,
         NUM_KILLS,
+        TRAP_ID,
         STRIKED_DAY,
         STRIKED_MONTH,
         STRIKED_YEAR
@@ -14,6 +19,7 @@ SELECT
     TOWN_CITY, 
     TERRITORIAL_AUTHORITY, 
     SUM(NUM_KILLS) AS NUM_KILLS,
+    COUNT(DISTINCT TRAP_ID) AS NUM_TRAPS,
     STRIKED_MONTH,
     STRIKED_YEAR
 FROM kills 

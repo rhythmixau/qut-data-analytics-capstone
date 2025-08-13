@@ -30,16 +30,16 @@ SELECT
     addr.longitude AS address_longitude,
     addr.latitude AS address_latitude,
     ST_DISTANCE(
-        ST_GEOGPOINT(loc.longitude, loc.latitude),
-        ST_GEOGPOINT(addr.longitude, addr.latitude)
+        ST_POINT(loc.longitude, loc.latitude),
+        ST_POINT(addr.longitude, addr.latitude)
     ) AS distance_in_meters
 FROM
     locations AS loc
     JOIN 
     addresses AS addr
-    ON ST_DWithin(
-        ST_GEOGPOINT(loc.longitude, loc.latitude),
-        ST_GEOGPOINT(addr.longitude, addr.latitude),
+    ON ST_DWITHIN(
+        ST_POINT(loc.longitude, loc.latitude),
+        ST_POINT(addr.longitude, addr.latitude),
         20000  -- The radius in meters. Adjust this value based on your data's density.
     )
-QUALIFY ROW_NUMBER() OVER (PARTITION BY loc.location_id ORDER BY distance_in_meters ASC) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY loc.location_id ORDER BY distance_in_meters ASC) = 1

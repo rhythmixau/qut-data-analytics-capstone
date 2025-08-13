@@ -42,3 +42,4 @@ SELECT
     shape_X AS longitude,
     shape_Y AS latitude
 FROM addresses
+WHERE (shape_X >= -180 AND shape_X <= 180) AND (shape_Y >= -90 AND shape_Y <= 90)

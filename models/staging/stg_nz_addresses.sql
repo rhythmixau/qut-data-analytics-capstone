@@ -1,7 +1,7 @@
 WITH addresses AS (
     SELECT 
         *
-    FROM {{ source("uploaded_geo_data", 'raw_addresses') }}
+    FROM {{ source("uploaded_geo_data", 'raw_nz_addresses') }}
 )
 SELECT 
     WKT,
@@ -42,3 +42,4 @@ SELECT
     shape_X AS longitude,
     shape_Y AS latitude
 FROM addresses
+WHERE (shape_X >= -180 AND shape_X <= 180) AND (shape_Y >= -90 AND shape_Y <= 90)

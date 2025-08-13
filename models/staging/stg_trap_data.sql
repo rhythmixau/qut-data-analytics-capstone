@@ -1,7 +1,7 @@
 WITH traps AS (
     SELECT
         *
-    FROM {{ source("gcp_qut_traps_data", "raw_traps")}}
+    FROM {{ source("gcp_qut_traps_data", "raw_trap_data")}}
 )
 SELECT
     id,

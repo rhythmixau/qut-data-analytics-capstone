@@ -17,5 +17,5 @@ SELECT
     sqkm,
     lat AS latitude,
     lng AS longitude,
-    `timezone` AS suburb_timezone
+    timezone AS suburb_timezone
 FROM suburbs

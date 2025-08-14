@@ -2,24 +2,30 @@ WITH trap_records AS (
     SELECT * FROM {{ ref('int_trap_details') }}
     WHERE ACTIVITY_TYPE = 'STRIKE'
 ),
+geo_locations AS (
+    SELECT * FROM {{ ref('dim_nz_geojson') }}
+),
 daily_strikes AS (
     SELECT 
-        LOCATION_ID, 
-        TRAP_ID,
-        ADDRESS_LATITUDE,
-        ADDRESS_LONGITUDE,
-        FULL_ADDRESS,
-        FULL_ROAD_NAME,
-        SUBURB_LOCALITY,
-        TOWN_CITY,
-        TERRITORIAL_AUTHORITY,    
-        ACTIVITY_TYPE, 
-        TO_CHAR(STRIKE_AT::TIMESTAMP, 'YYYY-MM-DD') STRIKED_DATE, 
-        CREATED_BY
-    FROM trap_records
+        t.LOCATION_ID,
+        l.ID AS GEO_LOCATION_ID, 
+        t.TRAP_ID,
+        t.ADDRESS_LATITUDE,
+        t.ADDRESS_LONGITUDE,
+        t.FULL_ADDRESS,
+        t.FULL_ROAD_NAME,
+        t.SUBURB_LOCALITY,
+        t.TOWN_CITY,
+        t.TERRITORIAL_AUTHORITY,    
+        t.ACTIVITY_TYPE, 
+        TO_CHAR(t.STRIKE_AT::TIMESTAMP, 'YYYY-MM-DD') STRIKED_DATE, 
+        t.CREATED_BY
+    FROM trap_records t
+    JOIN geo_locations l ON t.SUBURB_LOCALITY = l.SUBURB_LOCALITY
 )
 SELECT 
     LOCATION_ID, 
+    GEO_LOCATION_ID,
     TRAP_ID,
     ADDRESS_LATITUDE,
     ADDRESS_LONGITUDE,
@@ -37,6 +43,7 @@ SELECT
     CREATED_BY
 FROM daily_strikes   
 GROUP BY LOCATION_ID, 
+    GEO_LOCATION_ID,
     TRAP_ID,
     ADDRESS_LATITUDE,
     ADDRESS_LONGITUDE,

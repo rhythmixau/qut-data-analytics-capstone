@@ -117,3 +117,7 @@ sources:
             data_type: float64
           - name: timezone
             data_type: string
+      - name: nz_geo_data
+        columns:
+          - name: raw_geojson
+            data_type: variant

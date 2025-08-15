@@ -1,21 +1,24 @@
 {{
-    config(materialized='view')
+    config(materialized='table')
 }}
 
 WITH kills AS (
     SELECT 
         TO_CHAR(STRIKED_DATE::DATE, 'YYYY-MM') AS MONTH_YEAR,
+        GEO_LOCATION_ID,
+        SUBURB_LOCALITY,
         TOWN_CITY,
         TERRITORIAL_AUTHORITY,
         NUM_KILLS,
         TRAP_ID,
-        STRIKED_DAY,
         STRIKED_MONTH,
         STRIKED_YEAR
     FROM {{ ref('nz_daily_kills') }}
 )
 SELECT 
     MONTH_YEAR, 
+    GEO_LOCATION_ID,
+    SUBURB_LOCALITY,
     TOWN_CITY, 
     TERRITORIAL_AUTHORITY, 
     SUM(NUM_KILLS) AS NUM_KILLS,
@@ -24,6 +27,8 @@ SELECT
     STRIKED_YEAR
 FROM kills 
 GROUP BY MONTH_YEAR, 
+    GEO_LOCATION_ID,
+    SUBURB_LOCALITY,
     TOWN_CITY, 
     TERRITORIAL_AUTHORITY, 
     STRIKED_MONTH,
